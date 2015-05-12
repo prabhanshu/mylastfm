@@ -21,10 +21,10 @@ p Find me in app/views/dashboard/index.html.slim
           td
             = image_tag(element['image'][0]['#text'])
 
-
-- (1..(@no_of_pages)).each do |i|
-  = link_to i,params.merge({:page => i})
-  |
+-if !@no_of_pages.nil?
+  - (1..(@no_of_pages)).each do |i|
+    = link_to i,params.merge({:page => i})
+    |
 
 
 
