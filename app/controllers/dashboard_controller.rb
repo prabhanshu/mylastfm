@@ -6,7 +6,7 @@ class DashboardController < ApplicationController
   def index
     api_key=ENV['API_KEY']
     if api_key.nil?
-      api_key='245259b02709808d90e6b528b94a8f83'
+      api_key='XXXXXXXXXXXX'
     end
     connection = LastFM.connect(api_key)
     # album.search
