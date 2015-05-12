@@ -53,4 +53,4 @@ test:
 #  username: adwyze
 #  password: <%= ENV['ADWYZE_DATABASE_PASSWORD'] %>
 production:
-  url: <%= ENV['DATABASE_URL'] %>
+  url: <%= ENV['MY_DATABASE_URL'] %>
