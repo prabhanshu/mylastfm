@@ -19,7 +19,7 @@ p Find me in app/views/dashboard/index.html.slim
             = link_to element['name'], element['url'], :target => '_blank'
           td = element['listeners']
           td
-            = image_tag(element['image'][0]['#text'])
+            = image_tag(element['image'][0]['#text'].blank? ? 'http://www.icon100.com/up/3969/32/145-Male-head-hair-and-beard.png' : element['image'][0]['#text'] )
 
 -if !@no_of_pages.nil?
   - (1..(@no_of_pages)).each do |i|
