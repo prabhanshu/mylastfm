@@ -1,0 +1,20 @@
+ul.nav.pull-right
+  li
+    = link_to "Home",root_path
+  - if user_signed_in?
+    li#fat-menu.dropdown
+      a.dropdown-toggle data-toggle="dropdown" href="#"
+        | Account
+        b.caret
+      ul.dropdown-menu
+        li
+          = link_to "Profile", edit_user_registration_path
+        li
+          = link_to "Settings", '#'
+        li
+          = link_to "Dashboard", dashboard_index_path
+        li
+          = link_to "Logout", destroy_user_session_path, :method => :delete
+  - else
+    li
+      = link_to "Sign in", new_user_session_path
