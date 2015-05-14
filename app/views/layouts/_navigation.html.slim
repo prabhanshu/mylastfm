@@ -1,0 +1,9 @@
+ul.nav
+  li
+    = link_to 'Home', root_path
+  == render 'layouts/navigation_links'
+
+= form_tag(welcome_index_path, method: :get) do
+  = text_field(:search, :search, :name => 'search', :placeholder => 'search', :required => true, :value =>params['search'], :class => 'search-field')
+  = hidden_field(:search, :page, :name => 'page', :value => '1')
+  = submit_tag 'Search', :class => 'button'

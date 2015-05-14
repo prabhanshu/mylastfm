@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   get 'dashboard/index'
 
   get 'welcome/index'
+  get 'welcome/show'
 
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.

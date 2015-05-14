@@ -1,0 +1,50 @@
+h2 align="center" #{@artist_basic_info['name']}
+
+table
+  tr
+    td
+      = image_tag(@artist_basic_info['image'][3]['#text'].blank? ? 'http://www.icon100.com/up/3969/32/145-Male-head-hair-and-beard.png' : @artist_basic_info['image'][3]['#text'] )
+    td
+      p #{@artist_bio['summary'].html_safe}
+
+-if !@artist_tags.nil?
+  h3 |Tracks
+  table
+    thead
+      th
+        |  Name
+      th
+        |  Duration
+      th
+        |  Playcount
+      th
+        |  Listeners
+    tbody
+      - @artist_top_tracks_info.each do |element|
+        tr
+          td
+            | #{element['name']}
+          td
+            | #{element['duration'].to_i.divmod(60)[0]}:#{element['duration'].to_i.divmod(60)[1]}
+          td
+            | #{element['playcount']}
+          td
+            | #{element['listeners']}
+
+-if !@artist_tags.nil?
+  h3 |Tags
+  table
+    tr
+      - @artist_tags.each do |element|
+        td
+          = link_to(element['name'],element['url'], :target => '_blank')
+
+-if !@artist_suggestions.nil?
+  h3 | Similar Artist
+  /Publishing only Name and link of the similar artist and not summary and listener details as
+  /it will increase the no of API calls on that page
+  table
+    tr
+    - @artist_suggestions.each do |element|
+      td
+        = link_to(image_tag(element['image'][1]['#text'].blank? ? 'http://www.icon100.com/up/3969/32/145-Male-head-hair-and-beard.png' : element['image'][1]['#text']),welcome_show_url(params.merge(name: element['name'])))

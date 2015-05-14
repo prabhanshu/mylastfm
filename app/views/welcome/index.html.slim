@@ -1,20 +1,36 @@
-ul.nav.pull-right
-  li
-    = link_to "Home",root_path
-  - if user_signed_in?
-    li#fat-menu.dropdown
-      a.dropdown-toggle data-toggle="dropdown" href="#"
-        | Account
-        b.caret
-      ul.dropdown-menu
-        li
-          = link_to "Profile", edit_user_registration_path
-        li
-          = link_to "Settings", '#'
-        li
-          = link_to "Dashboard", dashboard_index_path
-        li
-          = link_to "Logout", destroy_user_session_path, :method => :delete
-  - else
-    li
-      = link_to "Sign in", new_user_session_path
+- if !@artist_list.nil? and @artist_list.is_a?(Array)
+  table
+    thead
+      tr
+        th Name
+        th Listeners
+        th Image
+    tbody
+      - @artist_list.each do |element|
+        tr
+          td
+            = link_to element['name'], welcome_show_url(params.merge(name: element['name']))
+          td = element['listeners']
+          td
+            = image_tag(element['image'][1]['#text'].blank? ? 'http://www.icon100.com/up/3969/32/145-Male-head-hair-and-beard.png' : element['image'][1]['#text'] )
+
+.div align='center'
+  -if !@no_of_pages.nil?
+    - if params[:page].to_i == 1
+      = link_to 'Next',params.merge({:page => params[:page].to_i + 1})
+      '
+      = link_to 'Last', params.merge({:page => @no_of_pages.to_i})
+    - elsif params[:page].to_i == @no_of_pages
+      = link_to 'First',params.merge({:page => 1})
+      '
+      = link_to 'Prev', params.merge({:page => params[:page].to_i - 1})
+    - else
+      = link_to 'First',params.merge({:page => 1})
+      '
+      = link_to 'Prev',params.merge({:page => params[:page].to_i - 1})
+      '
+      = link_to 'Next', params.merge({:page => params[:page].to_i + 1})
+      '
+      = link_to 'Last', params.merge({:page => @no_of_pages.to_i})
+
+  h4 Total Results: #{@total_results}  Number of Pages: #{@no_of_pages}

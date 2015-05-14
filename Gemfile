@@ -51,3 +51,7 @@ gem 'gemcutter'
 # gem 'tumble'
 gem 'faraday_middleware'
 gem 'crack'
+gem 'foundation-rails'
+group :development do
+  gem 'rails_layout'
+end
