@@ -43,7 +43,7 @@ class WelcomeController < ApplicationController
   end
 
   def search_history
-    @search_history=SearchHistory.where(user: current_user)
+    @search_history=SearchHistory.where(user: current_user).order(updated_at: :desc)
   end
   private
   def lastfm_connection

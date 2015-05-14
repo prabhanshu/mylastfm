@@ -5,4 +5,6 @@
   ul
     - @search_history.each do |x|
       li
-        =link_to "You searched for \"#{x.keyword}\"",welcome_index_path(search:x.keyword, page:1)
+        | You searched for &nbsp;
+        =link_to x.keyword,welcome_index_path(search:x.keyword, page:1)
+        | &nbsp; on #{x.updated_at.strftime('%c')}
