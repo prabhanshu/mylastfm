@@ -1,8 +1,8 @@
 require 'mylastfm'
 class WelcomeController < ApplicationController
 
+  before_action :authenticate_user!, only: :search_history
   def index
-
     if !params['search'].nil?
       limit=10
       @artist_hash = lastfm_connection.get_search_from_artist(params['search'],'page'=>params[:page],'limit'=>limit)
