@@ -11,6 +11,12 @@ class WelcomeController < ApplicationController
       @total_results=@artist_hash['results']['opensearch:totalResults']
       @no_of_pages=@total_results.to_i / limit
       @artist_list=@artist_hash['results']['artistmatches']['artist']
+
+      if user_signed_in?
+        search=SearchHistory.find_or_initialize_by(user: current_user,keyword:params['search'])
+        search.update_attributes(updated_at:Time.now)
+        search.save!
+      end
     end
   end
 
@@ -33,10 +39,12 @@ class WelcomeController < ApplicationController
         @artist_top_tracks_info=[@artist_top_tracks_info]
       end
 
-
     end
   end
 
+  def search_history
+    @search_history=SearchHistory.where(user: current_user)
+  end
   private
   def lastfm_connection
     api_key=ENV['API_KEY']
