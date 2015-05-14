@@ -1,4 +1,8 @@
-ul
-- @search_history.each do |x|
-  li
-    =link_to "You search for #{x.keyword}",welcome_index_path(search:x.keyword, page:1)
+-if @search_history.empty?
+  h2 align='center'
+    |You haven't started searching yet!!!
+-else
+  ul
+    - @search_history.each do |x|
+      li
+        =link_to "You searched for \"#{x.keyword}\"",welcome_index_path(search:x.keyword, page:1)
